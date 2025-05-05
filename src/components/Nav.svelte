@@ -80,7 +80,13 @@
 	bind:this={nav}
 	class={scrolledRatioInner >= 1 ? '' : 'nav-glass-effect-and-box-shadow'}
 >
-	<div id="site-name" on:click={scrollToTop}>
+	<div
+			id="site-name"
+			tabindex="0"
+			role="button"
+			on:click={scrollToTop}
+			on:keydown={(e) => (e.key === 'Enter' || e.key === ' ') && scrollToTop()}
+	>
 		AICERA
 	</div>
 	<div class="links">
@@ -100,7 +106,7 @@
 	</div>
 </nav>
 
-<style type="text/scss">
+<style lang="scss">
 	nav {
 		position: fixed;
 		top: 0;

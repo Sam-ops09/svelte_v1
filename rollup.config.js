@@ -1,3 +1,9 @@
+
+/**
+ * Rollup configuration for Svelte + TypeScript.
+ * This config uses sveltePreprocess, @rollup/plugin-typescript, and standard Svelte settings.
+ */
+
 import svelte from 'rollup-plugin-svelte';
 import commonjs from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
@@ -5,6 +11,7 @@ import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
 import css from 'rollup-plugin-css-only';
 import sveltePreprocess from 'svelte-preprocess';
+import typescript from '@rollup/plugin-typescript';
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -30,7 +37,7 @@ function serve() {
 }
 
 export default {
-	input: 'src/main.js',
+	input: 'src/main.js', // if your entry file is main.ts, change this accordingly
 	output: {
 		sourcemap: true,
 		format: 'iife',
@@ -45,31 +52,22 @@ export default {
 				dev: !production
 			}
 		}),
-		// we'll extract any component CSS out into
-		// a separate file - better for performance
+		// Extract component CSS into a separate file for better performance
 		css({ output: 'bundle.css' }),
 
-		// If you have external dependencies installed from
-		// npm, you'll most likely need these plugins. In
-		// some cases you'll need additional configuration -
-		// consult the documentation for details:
-		// https://github.com/rollup/plugins/tree/master/packages/commonjs
+		// Node resolution for npm packages
 		resolve({
 			browser: true,
 			dedupe: ['svelte']
 		}),
 		commonjs(),
+		typescript({ sourceMap: !production }),
 
-		// In dev mode, call `npm run start` once
-		// the bundle has been generated
+		// In development, serve and live-reload the site
 		!production && serve(),
-
-		// Watch the `public` directory and refresh the
-		// browser on changes when not in production
 		!production && livereload('public'),
 
-		// If we're building for production (npm run build
-		// instead of npm run dev), minify
+		// Minify in production
 		production && terser()
 	],
 	watch: {
