@@ -61,7 +61,15 @@ export default {
 			dedupe: ['svelte']
 		}),
 		commonjs(),
-		typescript({ sourceMap: !production }),
+		// Updated TypeScript configuration to properly handle source maps
+		typescript({
+			sourceMap: !production,
+			inlineSources: !production,
+			rootDir: "./src",
+			compilerOptions: {
+				sourceMap: true
+			}
+		}),
 
 		// In development, serve and live-reload the site
 		!production && serve(),

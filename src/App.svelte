@@ -13,6 +13,7 @@
   import gsap from "gsap";
   import ScrollTrigger from "gsap/ScrollTrigger";
   import Chatbot from "./components/Chatbot.svelte";
+  import Globe from "./components/Globe.svelte";
 
 	innerHeight.set(window.innerHeight);
 	innerWidth.set(window.innerWidth);
@@ -182,9 +183,9 @@
 <div id="content">
   <main>
     <Hero />
-		<Projects />
+    <About />
+    <Projects />
     <Technologies />
-		<About />
     <Contact />
   </main>
 </div>

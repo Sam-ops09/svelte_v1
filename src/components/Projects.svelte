@@ -153,6 +153,8 @@
 	<div class="listing">
 		{#each projects as project, i}
 			<div
+				role="button"
+				tabindex="0"
 				on:mouseenter={() => handleProjectMouseEnter(i)}
 				on:mouseleave={handleProjectMouseLeave}
 				on:click={() => handleProjectClick(
@@ -163,7 +165,20 @@
 					project.description,
 					project.url,
 					project.images
-				)}
+				  )}
+									on:keydown={(e) => {
+					if (e.key === 'Enter' || e.key === ' ') {
+					  handleProjectClick(
+						project.name,
+						project.type,
+						project.role,
+						project.technologies,
+						project.description,
+						project.url,
+						project.images
+					  );
+					}
+				  }}
 			>
 				<ProjectListingItem
 					number={i + 1}
@@ -171,6 +186,7 @@
 					technologies={project.technologies}
 				/>
 			</div>
+
 		{/each}
 	</div>
 	<div class="display" bind:this={imageDisplayContainer}>

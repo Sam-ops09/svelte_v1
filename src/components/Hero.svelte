@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import { MagneticElement } from '../helpers/magneticElement.js';
 	import { ScrollParallaxElement } from '../helpers/scrollParallax';
-  import { innerHeight, innerWidth } from "../helpers/stores.js";
+  	import { innerHeight, innerWidth } from "../helpers/stores.js";
 	import AnimatedBeamMultipleInput from "./AnimatedBeamMultipleInput.svelte";
 
 	const scrollToContact = () => {
